@@ -11,14 +11,23 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
+      Product.belongsTo(models.user, {
+        foreignKey: "user_id",
+        as: "user"
+      })
     }
   }
   Product.init({
     id: {
       type: DataTypes.INTEGER,
-      primaryKey: true,
       allowNull: false,
       autoIncrement: true
+    },
+    product_id: {
+      type: DataTypes.UUID,
+      allowNull: false,
+      primaryKey: true,
+      defaultValue: DataTypes.UUIDV4
     },
     user_id: {
       type: DataTypes.UUID,

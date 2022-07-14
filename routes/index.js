@@ -1,17 +1,13 @@
 const express = require("express");
 const ROUTER = express.Router();
-const userRoutes = require("./userRoutes");
-const tripRoutes = require("./tripRoutes");
-const authRoutes = require("./authRoutes");
-const recomendationRoutes = require("./recomendationRouter");
-const adminRoutes = require("./adminRouter");
+const userRoutes = require("./user");
+const productRoutes = require("./product");
+const authRoutes = require("./auth");
 const verifyToken = require("../middleware/verifyToken");
 
 ROUTER.use("/user", verifyToken, userRoutes);
-ROUTER.use("/trip", tripRoutes);
+ROUTER.use("/product", verifyToken, productRoutes);
 ROUTER.use(authRoutes);
-ROUTER.use("/recomendation", recomendationRoutes);
-ROUTER.use("/admin", verifyToken, adminRoutes);
 
 ROUTER.all("*", (req, res, next) => {
   res.status(404).json({
